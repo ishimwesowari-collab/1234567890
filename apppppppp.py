@@ -3,7 +3,7 @@ import numpy as np
 import streamlit as st
 
 # Load your saved model
-with open("25RP18587.pkl", "rb") as f:  # Make sure the filename matches your saved model
+with open("25RP18587.sav", "rb") as f:  # Make sure the filename matches your saved model
     model = pickle.load(f)
 
 st.title("🌾 Crop Yield Prediction App")
@@ -19,3 +19,4 @@ if st.button("Predict Yield"):
     X = np.array([[temperature]])
     pred = model.predict(X)
     st.success(f"🌱 Predicted Crop Yield: {pred[0]:.2f} units")
+
