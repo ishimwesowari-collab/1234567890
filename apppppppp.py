@@ -2,21 +2,16 @@ import pickle
 import numpy as np
 import streamlit as st
 
-# Load your saved model
-with open("25RP18587.sav", "rb") as f:  # Make sure the filename matches your saved model
+# Load model
+with open("25RP18587.sav", "rb") as f:
     model = pickle.load(f)
 
-st.title("🌾 Crop Yield Prediction App")
-st.write("Enter the temperature to predict crop yield:")
+st.title("Crop yield prediction")
+st.write("Fill the following data")
 
-# User input
-temperature = st.number_input(
-    "Temperature (°C)", min_value=0.0, max_value=50.0, step=0.1, value=27.0
-)
+temperature = st.number_input("Enter the temperature (°C)", min_value=0.0, step=0.1, value=100.0)
 
-# Prediction
-if st.button("Predict Yield"):
-    X = np.array([[temperature]])
+if st.button("Yield"):
+    X = np.array([[float(temperature)]])   # 2D array as expected by sklearn-like models
     pred = model.predict(X)
-    st.success(f"🌱 Predicted Crop Yield: {pred[0]:.2f} units")
-
+    st.success(f"Your yield is: {pred[0]:.2f}")
